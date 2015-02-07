@@ -152,6 +152,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AlumnosController.cs" />
     <Compile Include="Controllers\ImagenesController.cs" />
+    <Compile Include="Controllers\Login.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -183,10 +184,14 @@
     <Compile Include="Models\Profesor.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Usuarios.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModel\Alumno.cs" />
     <Compile Include="Models\ViewModel\CursoViewModel.cs" />
     <Compile Include="Models\ViewModel\EnvioCorreo.cs" />
     <Compile Include="Models\ViewModel\ImagenViewModel.cs" />
+    <Compile Include="Models\ViewModel\UsuarioView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorio\IRepositorio.cs" />
     <Compile Include="Repositorio\Repositorio.cs" />
@@ -205,6 +210,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="Seguridad\IdentidadPersonalizado.cs" />
+    <Compile Include="Seguridad\PrincipalPersonalizado.cs" />
+    <Compile Include="Seguridad\ProveedorAutenticacion.cs" />
+    <Compile Include="Seguridad\ProveedorRol.cs" />
+    <Compile Include="Seguridad\Usuario.cs" />
     <Compile Include="ValuesController1.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -234,6 +244,7 @@
     <Content Include="Views\Alumnos\Correo.cshtml" />
     <Content Include="Views\Shared\_PlantillaCorreo.cshtml" />
     <Content Include="Views\Shared\_ComboIdioma.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

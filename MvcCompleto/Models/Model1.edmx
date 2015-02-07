@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Curso_DelegaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Curso_DelegaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Alumno">
           <Key>
             <PropertyRef Name="idAlumno" />
@@ -44,6 +44,17 @@
           </Key>
           <Property Name="idProfesor" Type="int" Nullable="false" />
           <Property Name="idCurso" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="rol" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="apellidos" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_Alumno_Curso">
           <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
@@ -99,6 +110,7 @@
           <EntitySet Name="Imagen" EntityType="Self.Imagen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profesor" EntityType="Self.Profesor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profesor_Curso" EntityType="Self.Profesor_Curso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Alumno_Curso" Association="Self.FK_Alumno_Curso">
             <End Role="Curso" EntitySet="Curso" />
             <End Role="Alumno" EntitySet="Alumno" />
@@ -116,8 +128,7 @@
             <End Role="Profesor_Curso" EntitySet="Profesor_Curso" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Curso_DelegaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -204,7 +215,19 @@
             <End Role="Curso" EntitySet="Curso" />
             <End Role="Profesor" EntitySet="Profesor" />
           </AssociationSet>
+          <EntitySet Name="Usuarios" EntityType="Curso_DelegaModel.Usuarios" />
         </EntityContainer>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="rol" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -255,6 +278,18 @@
               <ScalarProperty Name="idProfesor" ColumnName="idProfesor" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="Curso_DelegaModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

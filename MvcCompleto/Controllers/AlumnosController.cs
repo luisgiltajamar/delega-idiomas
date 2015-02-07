@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Mail;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using MvcCompleto.Adaptador;
@@ -14,11 +16,30 @@ using MvcCompleto.Repositorio;
 
 namespace MvcCompleto.Controllers
 {
+
+    [Authorize]
     public class AlumnosController : Controller
     {
 
         private IRepositorio<Alumno> repo;
-        private IAdaptador<Alumno, AlumnoViewModel> adaptador; 
+        private IAdaptador<Alumno, AlumnoViewModel> adaptador;
+
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (Request.Cookies["lang"] != null)
+            {
+                Thread.CurrentThread.CurrentCulture = new CultureInfo(Request.Cookies["lang"].Value);
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(Request.Cookies["lang"].Value);
+            }
+
+
+            base.OnActionExecuting(filterContext);
+
+
+
+        }
+
         public AlumnosController(IRepositorio<Alumno> repo,
             IAdaptador<Alumno, AlumnoViewModel> adaptador
             )
@@ -28,6 +49,7 @@ namespace MvcCompleto.Controllers
         }
 
         // GET: Alumnos
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var data = repo.Get();
@@ -36,6 +58,7 @@ namespace MvcCompleto.Controllers
 
             return View(final);
         }
+        [Authorize(Roles = "Admin")]
         public ActionResult Alta()
         {
 
@@ -109,6 +132,13 @@ namespace MvcCompleto.Controllers
             }
 
 
+        }
+
+        [HttpPost]
+        public ActionResult Idioma(string id)
+        {
+            IdiomasSitio.SetIdioma(id);
+            return Json("OK");
         }
     }
 }

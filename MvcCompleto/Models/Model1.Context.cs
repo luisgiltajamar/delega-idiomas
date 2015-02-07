@@ -29,5 +29,6 @@ namespace MvcCompleto.Models
         public virtual DbSet<Curso> Curso { get; set; }
         public virtual DbSet<Imagen> Imagen { get; set; }
         public virtual DbSet<Profesor> Profesor { get; set; }
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
     }
 }

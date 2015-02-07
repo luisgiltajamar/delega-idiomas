@@ -12,6 +12,7 @@
         <AssociationConnector Association="Curso_DelegaModel.FK_Alumno_Curso" ManuallyRouted="false" />
         <AssociationConnector Association="Curso_DelegaModel.FK_Imagen_ToTable" ManuallyRouted="false" />
         <AssociationConnector Association="Curso_DelegaModel.Profesor_Curso" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Curso_DelegaModel.Usuarios" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
