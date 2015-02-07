@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using MvcCompleto.Seguridad
+@{
+
+    var usr = User as PrincipalPersonalizado;
+    
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -27,7 +34,13 @@
             </div>
         </div>
     </div>
-
+    <div>
+        @if (User.Identity.IsAuthenticated)
+        {
+          @usr.MiIdentidadPersonalizado.Nombre <a href="/Login/Logout"> Cerrar sesion</a>
+        }
+        
+    </div>
     <div class="container body-content">
         @Html.Partial("_ComboIdioma")
         @RenderBody()

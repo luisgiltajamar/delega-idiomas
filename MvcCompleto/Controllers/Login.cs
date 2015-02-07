@@ -28,5 +28,12 @@ namespace MvcCompleto.Controllers
 
            return View(model);
        }
+
+       public ActionResult Logout()
+       {
+           Session.Clear();
+          FormsAuthentication.SignOut();
+           return RedirectToAction("Index");
+       }
     }
 }
