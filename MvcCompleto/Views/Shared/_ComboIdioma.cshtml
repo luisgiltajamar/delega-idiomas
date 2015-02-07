@@ -1,0 +1,34 @@
+﻿@using System.Threading
+@using MvcCompleto.Models
+@{
+    var lang = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+
+    if (Request.Cookies["lang"] != null)
+    {
+        lang = Request.Cookies["lang"].Value;
+    }
+
+}
+
+<select name="idioma" id="idioma">
+    @foreach (var item in IdiomasSitio.Idiomas)
+    {
+        <option value="@item.Valor" @(item.Valor==lang?"selected='selected'":"")  >
+            @item.Nombre
+        </option>
+    }
+</select>
+
+<script>
+    $("#idioma").change(function() {
+
+        var val = $("#idioma").val();
+        $.post("/Alumnos/Idioma/" + val, function() {
+            location.reload();
+
+        });
+
+
+    });
+
+</script>
